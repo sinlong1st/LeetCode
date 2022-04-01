@@ -3,6 +3,7 @@
  * @return {number}
  */
  var lengthOfLastWord = function(s) {
+    if (s.length > 104){return 0;}
     let spaceNum = 0;
     for (let i = s.length - 1; i >= 0; i--){
         // if ((s[i] < 32) || (s[i] > 32 && s[i] < 65) || (s[i] > 90 && s[i] < 97) || (s[i] > 122)){
