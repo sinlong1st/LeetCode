@@ -9,3 +9,9 @@ select a.firstname, a.surname
 from cd.members a
 where a.memid IN (select recommendedby from cd.members)
 order by a.surname, a.firstname
+
+How can you output a list of all members, including the individual who recommended them (if any)? Ensure that results are ordered by (surname, firstname).
+select a.firstname, a.surname, b.firstname, b.surname
+from cd.members a 
+left outer join cd.members b on b.memid = a.recommendedby
+order by a.surname, a.firstname
