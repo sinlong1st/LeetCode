@@ -15,3 +15,11 @@ select a.firstname, a.surname, b.firstname, b.surname
 from cd.members a 
 left outer join cd.members b on b.memid = a.recommendedby
 order by a.surname, a.firstname
+
+How can you produce a list of all members who have used a tennis court? Include in your output the name of the court, and the name of the member formatted as a single column. Ensure no duplicate data, and order by the member name followed by the facility name.
+select distinct on (a.firstname||' '||a.surname, c.name)
+			a.firstname||' '||a.surname as member,c.name as facility
+from cd.bookings b join cd.members a  on a.memid = b.memid 
+join cd.facilities c on b.facid = c.facid
+where c.name like 'Tennis%'
+order by member, c.name
