@@ -38,3 +38,12 @@ JOIN cd.facilities c on a.facid = c.facid
 where date(starttime) = '2012-09-14' 
 and ((a.memid = 0 and a.slots*c.guestcost > 30) or (a.memid <> 0 and a.slots*c.membercost > 30))
 order by cost desc
+
+How can you output a list of all members, including the individual who recommended them (if any), without using any joins? 
+Ensure that there are no duplicates in the list, and that each firstname + surname pairing is formatted as a column and ordered.
+SELECT distinct concat(a.firstname,' ',a.surname) as member,
+		(select concat(b.firstname,' ',b.surname) 
+		 from cd.members b
+		 where b.memid = a.recommendedby) as recommender
+from cd.members a
+order by member
