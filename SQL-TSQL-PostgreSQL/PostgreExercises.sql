@@ -64,3 +64,16 @@ from cd.bookings a JOIN cd.members b on a.memid = b.memid
 JOIN cd.facilities c on a.facid = c.facid) as foo
 where date(starttime) = '2012-09-14' and cost > 30
 order by cost desc
+
+
+select member, facility, cost from 
+(select a.starttime,concat(b.firstname,' ',b.surname) as member, 
+c.name as facility,
+case
+	when a.memid = 0 then a.slots*c.guestcost
+	else a.slots*c.membercost
+end as cost
+from cd.bookings a JOIN cd.members b on a.memid = b.memid
+JOIN cd.facilities c on a.facid = c.facid) as foo
+where date(starttime) = '2012-09-14' and cost > 30
+order by cost desc
