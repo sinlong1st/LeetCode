@@ -85,3 +85,11 @@ We want to increase the price of the tennis courts for both members and guests. 
 update cd.facilities
 set guestcost = 30, membercost = 6
 where name like 'Tennis%'
+
+
+update cd.facilities facs
+    set
+        membercost = facs2.membercost * 1.1,
+        guestcost = facs2.guestcost * 1.1
+    from (select * from cd.facilities where facid = 0) facs2
+    where facs.facid = 1;
