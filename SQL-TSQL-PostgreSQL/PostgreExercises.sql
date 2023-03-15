@@ -66,14 +66,18 @@ where date(starttime) = '2012-09-14' and cost > 30
 order by cost desc
 
 
-select member, facility, cost from 
-(select a.starttime,concat(b.firstname,' ',b.surname) as member, 
-c.name as facility,
-case
-	when a.memid = 0 then a.slots*c.guestcost
-	else a.slots*c.membercost
-end as cost
-from cd.bookings a JOIN cd.members b on a.memid = b.memid
-JOIN cd.facilities c on a.facid = c.facid) as foo
-where date(starttime) = '2012-09-14' and cost > 30
-order by cost desc
+insert into cd.facilities values(9,'Spa',20,30,100000,800)
+
+insert into cd.facilities values(9,'Spa',20,30,100000,800), 
+(10,'Squash Court 2', 3.5, 17.5, 5000, 80)
+
+Lets try adding the spa to the facilities table again. This time, though, we want to automatically generate the value for the next facid, rather than specifying it as a constant. 
+Use the following values for everything else:. Name: 'Spa', membercost: 20, guestcost: 30, initialoutlay: 100000, monthlymaintenance: 800.
+insert into cd.facilities
+(select MAX(a.facid)+1, 'Spa',20,30,100000,800
+ from cd.facilities a)
+ 
+ update cd.facilities
+set initialoutlay = 10000
+where name = 'Tennis Court 2'
+
