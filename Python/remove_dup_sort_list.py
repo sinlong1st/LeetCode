@@ -42,7 +42,6 @@ if __name__ == "__main__":
 
     k_num = remove_dup_2(nums)
     assert k_num == len(expectedNums)
-    print(nums)
 
     for i in range(k_num):
         print(nums[i], expectedNums[i])
