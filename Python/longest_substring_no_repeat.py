@@ -40,6 +40,11 @@ def longest_substring_no_repeat(string):
     # print(f"\nFinal max: {temp_max}, final list: {w_list}")
     return temp_max
 
+def longest_substring_no_repeat_v1(s: str) -> int:
+    last_seen = {}
+    start = 0
+
+
 def longest_substring_no_repeat_v2(s: str) -> int:
     # last seen index of each character
     last = {}
